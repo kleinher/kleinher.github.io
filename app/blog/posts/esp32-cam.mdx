@@ -1,0 +1,61 @@
+---
+title: 'I Bought an ESP32 Camera and This Is How I Made It Work'
+publishedAt: '2024-11-14'
+summary: 'Using an ESP32 with a camera and making it work (without pulling your hair out)'
+---
+
+Here's how I got my ESP32 camera working. It took some time and research to navigate through all the hacks and quirks, but it was worth it.
+
+## Which One Did I Buy?
+
+[Here’s the one I bought](https://es.aliexpress.com/item/1005002808966055.html?spm=a2g0o.order_list.order_list_main.101.37e3194dLM5yUd&gatewayAdapt=glo2esp) in case you’re interested in getting the same model.
+
+> *Note*: If it’s not available when you read this, most generic ESP32 camera modules should work. However, newer models might introduce different nuances. Good luck!
+
+## Good Things to Know Before You Start
+
+- **Camera Module**: There are a lot of options out there, but I recommend sticking with a basic module (like the OV2640 with a 66° lens) to avoid compatibility issues.
+- **Capacitor**: I used a 2200uF 16V capacitor to improve stability and performance. It’s optional but may help prevent image lag.
+
+## Setting Up the Connections
+### Option 1: Using a USB Programmer
+
+Using a USB programmer, you can plug the camera directly into your laptop. It should work for most basic testing.
+
+### Option 2: Using an External Power Supply
+
+Because the ESP32 camera modules are sometimes sensitive to power fluctuations, you may experience issues with a standard USB connection due to current spikes. I tried two configurations with a capacitor connected in parallel to the power supply, and here are the results:
+
+#### 3V Power Supply
+Connecting directly to the 3.3V and GND pins on the ESP32 worked, but I noticed a slightly slower image display.
+
+#### 5V Power Supply
+Connecting directly to the 5V and GND pins worked better, resulting in faster image processing.
+
+#### 5V with Capacitor
+This setup gave the best results with higher speed and better image quality.
+
+![ESP32 Camera Setup](https://your-image-url.com/esp32-setup.jpg) 
+
+## Images of the Connections
+
+Here's an overview of the wiring configurations I used:
+
+1. **Basic Wiring**:
+   ![Basic 3V Setup](https://your-image-url.com/esp32-basic-3v.jpg) 
+
+2. **Improved with Capacitor**:
+   ![5V Setup with Capacitor](https://your-image-url.com/esp32-5v-capacitor.jpg)
+
+3. **Complete Setup**:
+   ![Full ESP32 Camera Setup](https://your-image-url.com/esp32-complete.jpg) 
+
+> *Tip*: Be cautious with polarity when connecting capacitors, as incorrect connections could damage your module.
+
+Espero que este formato mejore la legibilidad y que las imágenes proporcionen una buena guía visual. Recuerda reemplazar los enlaces de imagen (`https://your-image-url.com/...`) por las URLs reales donde hayas subido tus fotos (por ejemplo, a un servicio de alojamiento de imágenes).
+
+
+
+    
+
+
