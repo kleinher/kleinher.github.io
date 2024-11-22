@@ -1,11 +1,22 @@
 import { BlogPosts } from 'app/components/posts'
-
+import Image from 'next/image';
+import myImage from './cara.jpg';
 export default function Page() {
   return (
     <section>
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">
-        Hernan Kleinubing
-      </h1>
+      <div className="flex items-center mb-8">
+        {/* Imagen redonda */}
+        <Image
+          src={myImage} // Puedes usar directamente el objeto importado
+          alt="Hernan Kleinubing"
+          width={96} // Ajusta según el tamaño deseado
+          height={96}
+          className="rounded-full mr-4" // Aplica clases para hacerlo redondo
+        />
+        <h1 className="text-2xl font-semibold tracking-tighter">
+          Hernan Kleinubing
+        </h1>
+      </div>
       <p className="mb-4">
         {`I'm a Software Engineer focused mainly in Backend. Also Electronics Hobbist 
          interested in technology and it's apliances. Driven by clean code principles, 
@@ -17,5 +28,5 @@ export default function Page() {
         <BlogPosts />
       </div>
     </section>
-  )
+  );
 }
