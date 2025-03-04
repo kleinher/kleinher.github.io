@@ -1,0 +1,100 @@
+---
+title: 'Automated someones work but didn't get paid for it'
+publishedAt: '2025-11-04'
+summary: 'Automated car maintenance updates using WhatsApp and ChatGPT, but couldn't make the sale'
+---
+
+My brother in law owns a car maintenance company.
+His problem was that he had to interact with the drivers of those cars to get the kilometers updates to know when 
+to perform maintenance. It was a slow and laborious job, so I decided to automate the process for him.
+
+Pictures at the end.
+
+## The first idea
+
+Initially, the idea was to build a website where drivers could update the Km. 
+My brother-in-law would send them a link to access the site, where they would find a form to update it.
+
+## Implemeting new ways
+
+The initial tests worked, but it was clear that it was a suboptimal solution. 
+I decided to pivot and not use a web interface for the drivers, only for my brother-in-law. 
+The idea evolved into using the web as a dashboard to visualize the cars, 
+where tasks could be marked as completed with the click of a button.
+
+### WhatsApp Integration
+
+I wanted to make it easy for both the client and the drivers, as everyone uses WhatsApp for communication. 
+So, I opted to use a JavaScript library called "whatsapp-web-js" to establish the connection quickly and easily. 
+Although WhatsApp has an official API, it is very difficult to access and use. The library option, while not entirely legal, 
+was a viable choice given the time and budget constraints (which, ultimately, were quite followed).
+
+### ChatGPT Handles the Conversation
+
+With the WhatsApp integration almost complete, I could send a predefined message, and the client only had 
+to wait for the driver to respond. 
+However, this was unlikely, and inspired by some colleagues, I decided to implement a solution using AI to simulate 
+a person having the conversation. 
+One concern was the cost, but I realized that using the ChatGPT API was very affordable, especially 
+with the option to choose less complex and more economical models.
+
+#### ChatGPT Executes Code
+
+A very powerful feature I found is that it is possible to train the AI to execute functions in your code very simply. 
+I used it to determine, based on the context of the conversation, when the driver had responded with the current kilometers of the car. 
+Once I had this, the AI would execute a function to validate and update the car in the database, interpreting not only the functions to execute but also the correct parameters. 
+For example, if the driver responded with "200k," ChatGPT interpreted that value as 200.000.
+
+This is undoubtedly a very powerful feature that I would have liked to use much more in the project.
+
+### The Boring Part: The Frontend
+
+For the admin web interface, I decided to use React, utilizing Google's MUI library package and particularly DataGrid for displaying tables and Toolpad for the dropdown menu. 
+While it was interesting to find these libraries and configure them to perform complex tasks, this part was the least innovative.
+
+I deployed the frontend using Vercel, which was a quick and easy option. 
+However, it required setting up an HTTPS connection with the backend, which led to additional steps such as purchasing 
+a domain. Although it was not what I initially expected, 
+it turned out to be an interesting and valuable learning experience.
+
+### The Stressful Part: The Backend
+
+#### Railway: Good While It Lasted
+
+Initially, I used Railway to deploy Docker containers. I liked it a lot because it saved me from having to configure an instance as a server and the CI/CD. 
+The problem was that they apparently have the connection of the WhatsApp library I used blocked. After many attempts to connect to WhatsApp servers without success, 
+I gave up using it and opted for a more conventional option.
+
+#### AWS: My Old Friend
+
+I tried to avoid using an EC2 instance on AWS because I wanted to use services that would take responsibilities off my hands. 
+However, in the end, it was the best and fastest option. 
+I used docker-compose to bring up the containers for the backend, database, and nginx. 
+I chose not to use microservices as I wanted to do it as quickly as possible. 
+   The technologies I used were:
+      - JavaScript as the language
+      - Node.js as the framework
+      - Jest for testing
+      - PostgreSQL for the database
+      - Nginx for the reverse proxy and configuring HTTPS certificates
+      - Docker and docker-compose for orchestration
+      - GitHub Actions for continuous deployment.
+
+### Conclusions
+
+In the end, the product was very well received by the client; it was exactly what he needed. However, the solution was over-engineered, 
+so we couldn't agree on a price. Considering the maintenance it would require, the cost-benefit ratio was ultimately not sufficient.
+
+The application was a success; I learned a lot about technologies, but what I still need to learn more about is business. 
+Undoubtedly, these are very powerful tools to create solutions quickly and relatively simply.
+
+![Frontend](../../resources/car-maintainance/frontend.png)
+![WhatsApp](../../resources/car-maintainance/conver.png)
+
+
+
+
+
+    
+
+
