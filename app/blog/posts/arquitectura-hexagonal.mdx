@@ -1,0 +1,42 @@
+---
+title: 'Arquitectura Hexagonal: bajado a tierra'
+publishedAt: '2025-02-05'
+summary: 'La Arquitectura Hexagonal es más fácil de lo que parece'
+---
+
+## Arquitectura Hexagonal
+### Resumen
+
+En la capa de servicios, si necesitas interactuar con algún servicio externo, como un cliente o un repositorio,
+estos se instancian usando inyección de dependencias a través de una interfaz en lugar de una clase específica.
+Esto permite modificar la implementación de la conexión con el servicio externo de manera discrecional.
+
+### Ejemplo de código:
+
+```java
+public interface ServicioExterno {
+    void realizarOperacion();
+}
+
+public class ServicioExternoImpl implements ServicioExterno {
+    @Override
+    public void realizarOperacion() {
+        // Implementación de la operación
+    }
+}
+
+public class Servicio {
+    private final ServicioExterno servicioExterno;
+
+    public Servicio(ServicioExterno servicioExterno) {
+        this.servicioExterno = servicioExterno;
+    }
+
+    public void ejecutar() {
+        servicioExterno.realizarOperacion();
+    }
+}
+```
+
+En este ejemplo, `Servicio` depende de la interfaz `ServicioExterno`,
+ lo que permite cambiar la implementación de `ServicioExternoImpl` sin modificar la clase `Servicio`.
